@@ -29,9 +29,6 @@ pub fn build(b: *std.Build) void {
     lib.linkLibrary(toml_to_json);
     lib.addIncludePath(.{ .path = "toml-to-json" });
 
-    const ztoml_module = b.addModule("ztoml", std.Build.CreateModuleOptions{ .source_file = .{ .path = "src/main.zig" } });
-    lib.addModule("ztoml", ztoml_module);
-
     b.installArtifact(lib);
 
     const main_tests = b.addTest(.{
