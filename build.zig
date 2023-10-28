@@ -20,7 +20,7 @@ pub fn build(b: *std.Build) void {
     });
     b.default_step.dependOn(&rust_compile.step);
 
-    lib.addLibraryPath(.{ .path = "target/release" });
+    lib.addLibraryPath(.{ .path = "./target/release" });
     lib.linkSystemLibrary("toml_to_json");
 
     b.installArtifact(lib);
