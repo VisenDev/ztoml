@@ -2,7 +2,7 @@
 name = "toml_to_json"
 description = "Convert TOML to JSON"
 license = "MIT"
-version = "1.0"
+version = "1.0.0"
 authors = ["William Woodruff <william@yossarian.net>", "Robert Burnett"]
 edition = "2021"
 homepage = "https://github.com/woodruffw/toml2json"
