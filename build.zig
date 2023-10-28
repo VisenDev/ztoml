@@ -24,6 +24,7 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
         .target = target,
     });
+    toml_to_json.step.dependOn(&rust_compile.step);
     toml_to_json.addObjectFile(.{ .path = "./target/release/libtoml_to_json.a" });
     lib.linkLibrary(toml_to_json);
     lib.addIncludePath(.{ .path = "toml-to-json" });
