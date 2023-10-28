@@ -19,9 +19,14 @@ pub fn build(b: *std.Build) void {
         "--release",
     });
     b.default_step.dependOn(&rust_compile.step);
-
-    lib.addLibraryPath(.{ .path = "./target/release" });
-    lib.linkSystemLibrary("toml_to_json");
+    var toml_to_json = b.addStaticLibrary(.{
+        .name = "toml-to-json",
+        .optimize = optimize,
+        .target = target,
+    });
+    toml_to_json.addObjectFile(.{ .path = "./target/release/libtoml_to_json.a" });
+    lib.linkLibrary(toml_to_json);
+    lib.addIncludePath(.{ .path = "toml-to-json" });
 
     b.installArtifact(lib);
 
