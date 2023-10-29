@@ -9,7 +9,7 @@ fn toSlice(str: [*c]u8) []u8 {
     return str[0..len];
 }
 
-pub fn parseToml(comptime T: type, a: std.mem.Allocator, input_string: []const u8) !std.json.Parsed(T) {
+pub fn parseToml(comptime T: type, a: std.mem.Allocator, input_string: [:0]const u8) !std.json.Parsed(T) {
     const raw_string = toml_to_json.tomlToJson(input_string.ptr);
     defer toml_to_json.tomlToJsonFree(raw_string);
     if (raw_string == null) {
