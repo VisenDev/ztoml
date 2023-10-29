@@ -40,3 +40,26 @@ test {
     const parsed = try parseToml(toml_type, std.testing.allocator, toml);
     defer parsed.deinit();
 }
+
+test "failing" {
+    const toml =
+        \\[data]
+        \\author = "Robert"sldfkajs;ldkfj;af[a][][a]sdf[]"""""""
+        \\github = "VisenDev"
+        \\#heres a commentalksd;flakjsdf[]s[df][][]
+        \\
+        \\[numbers]
+        \\list = [1, 2, 3]
+    ;
+    const toml_type = struct {
+        data: struct {
+            author: []const u8,
+            github: []const u8,
+        },
+        numbers: struct {
+            list: []const u32,
+        },
+    };
+    const parsed = parseToml(toml_type, std.testing.allocator, toml) catch return;
+    defer parsed.deinit();
+}
