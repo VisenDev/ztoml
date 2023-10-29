@@ -2,7 +2,7 @@ use std::ffi::CString;
 use std::os::raw::c_char;
 
 #[no_mangle]
-pub extern "C" fn tomlToJson(input: *const c_char) -> *const c_char {
+pub extern "C" fn tomlToJson(input: *const c_char) -> *mut c_char {
     use std::ffi::CStr;
     let c_str: &CStr = unsafe { CStr::from_ptr(input) };
     let str_slice: &str = match c_str.to_str().ok() {
@@ -29,6 +29,6 @@ pub extern "C" fn tomlToJson(input: *const c_char) -> *const c_char {
 
     match c_string {
         Some(c_string) => c_string.into_raw(),
-        None => std::ptr::null(), // Return a null pointer if an error occurred
+        None => std::ptr::null_mut(), // Return a null pointer if an error occurred
     }
 }
