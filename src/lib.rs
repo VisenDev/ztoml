@@ -23,6 +23,6 @@ pub extern "C" fn tomlToJson(input: *const c_char) -> *mut c_char {
 
     match c_string {
         Some(c_string) => c_string.into_raw(),
-        None => std::ptr::null(), // Return a null pointer if an error occurred
+        None => std::ptr::null_mut(), // Return a null pointer if an error occurred
     }
 }
