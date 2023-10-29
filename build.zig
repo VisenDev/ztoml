@@ -5,7 +5,7 @@ pub fn build(b: *std.Build) void {
 
     const optimize = b.standardOptimizeOption(.{});
 
-    _ = b.addModule("ztoml", .{
+    const module = b.addModule("ztoml", .{
         .source_file = .{ .path = "src/main.zig" },
     });
 
@@ -16,6 +16,7 @@ pub fn build(b: *std.Build) void {
         "--release",
     });
     b.default_step.dependOn(&rust_compile.step);
+    module.builder.default_step.dependOn(&rust_compile.step);
 
     const main_tests = b.addTest(.{
         .root_source_file = .{ .path = "src/main.zig" },
