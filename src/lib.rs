@@ -32,3 +32,10 @@ pub extern "C" fn tomlToJson(input: *const c_char) -> *mut c_char {
         None => std::ptr::null_mut(), // Return a null pointer if an error occurred
     }
 }
+
+#[no_mangle]
+pub extern "C" fn tomlToJsonFree(ptr: *mut c_char) {
+    if !ptr.is_null() {
+	    let _ = CString::from_raw(ptr);
+    }
+}
