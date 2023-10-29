@@ -54,3 +54,8 @@ And this to your build.zig.zon dependencies
 
 
 ```
+
+
+### Troubleshooting
+
+Make sure you pass a sentinel terminated string to parseToml or the function will fail. You can use the `allocator.dupeZ` to acheive this if your u8 slice isn't null terminated
