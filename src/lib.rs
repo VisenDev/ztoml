@@ -9,7 +9,7 @@ pub extern "C" fn tomlToJson(input: *const c_char) -> *mut c_char {
         Some(value) => value,
         None => {
             eprintln!("Error: Failed to convert toml to json");
-            return std::ptr::null(); // Return from the main function
+            return std::ptr::null_mut(); // Return from the main function
         }
     };
     //let str_buf: String = str_slice.to_owned();
@@ -36,6 +36,6 @@ pub extern "C" fn tomlToJson(input: *const c_char) -> *mut c_char {
 #[no_mangle]
 pub extern "C" fn tomlToJsonFree(ptr: *mut c_char) {
     if !ptr.is_null() {
-	    let _ = CString::from_raw(ptr);
+	    unsafe {let _ = CString::from_raw(ptr);}
     }
 }
