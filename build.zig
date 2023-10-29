@@ -33,10 +33,10 @@ pub fn build(b: *std.Build) void {
     test_step.dependOn(&run_main_tests.step);
 }
 
-pub fn link(step: *std.build.CompileStep) void {
-    step.addLibraryPath(.{ .path = "target/release" });
+pub fn link(b: *std.Build, step: *std.build.CompileStep) void {
+    step.addLibraryPath(.{ .path = b.pathFromRoot("target/release") });
     step.linkSystemLibrary("toml_to_json");
-    step.addIncludePath(.{ .path = "src" });
+    step.addIncludePath(.{ .path = b.pathFromRoot("src") });
 }
 
 //const std = @import("std");
