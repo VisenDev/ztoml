@@ -1,6 +1,7 @@
 # ztoml
 
-Easily parse toml into a zig struct
+- Easily parse toml into a zig struct
+- Requires zig 0.11.0
 
 ### Usage
 
